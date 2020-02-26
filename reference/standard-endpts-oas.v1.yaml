@@ -1,0 +1,702 @@
+openapi: 3.0.0
+info:
+  title: P20/20 Standard REST Endpoints
+  version: '1.0'
+  contact: {}
+  description: "This API lists the standard interface all services should implement.  \nSee <a href=\"https://atlas.work.local/corp/ops/sea/Documents/Architecture%20Standards%20and%20Guidelines/Application%20Standards/DigitalGlobe%20Target%20Architecture%20Build%20Governance%20Specification.docx?Web=1\">Build Governance</a> for more information.\n\nThe following are the required endpoints for every P2020 Service\n\n```\nServiceInfo - \"/\" returns information about the service\n\nStatus = \"/status\" returns the status of the service based on only it's internal dependencies. I.E. Database, etc..\n\nHealthCheck = \"/healthcheck\" returns the full status of the service based on internal & external depdencies.\n```\n\nThe following are optional endpoints\n\n```\nLoggers - \"/loggers\" allows for the retrieval of the services loggers and modification of their associated log levels.\n\nStatistics - \"/statistics\" allows for retrieval of statistics related to the service and it's endpoints.\n\n```"
+servers:
+  - url: '{defaultServerUrl}'
+    variables:
+      defaultServerUrl:
+        default: 'http://www.example.com'
+paths:
+  /statistics:
+    get:
+      summary: Retrieve service specific stats
+      description: 'Optional Endpoint! Retrieve statistics related to the service. The only requirement of the response is that return a hateaos link to itself and a statistic object or objects. The structure of the object can be service specific. The example contains serveral stats representing service endpoint statistics and each is named uniquely to describe what it is a stat of.'
+      operationId: RetrieveServiceSpecificStats
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/hal+json:
+              schema:
+                type: object
+                example: |-
+                  {
+                    "_links":{
+                      "self":{
+                        "href": "http://localhost:2020/statistics"
+                      }
+                    },
+                    "List Jobs":{
+                      "name": "[GET] /JOBS",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.874+0000"
+                    },
+                    "Process Callbacks":{
+                      "name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.877+0000"
+                    },
+                    "Create Job":{
+                      "name": "[POST] /JOBS",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[POST] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.880+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[POST] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.880+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.877+0000"
+                    },
+                    "Get Job":{
+                      "name": "[GET] /JOBS/{INSTANCEID}",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /JOBS/{INSTANCEID}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /JOBS/{INSTANCEID}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                    },
+                    "Statistics":{
+                      "name": "[GET] /STATISTICS",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /STATISTICS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /STATISTICS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                    },
+                    "Status":{
+                      "name": "[GET] /STATUS",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /STATUS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.885+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /STATUS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.885+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                    },
+                    "HealthCheck":{
+                      "name": "[GET] /HEALTHCHECK",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /HEALTHCHECK-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.895+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /HEALTHCHECK-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.895+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.885+0000"
+                    },
+                    "Service Info":{
+                      "name": "[GET] /",
+                      "min": 0,
+                      "max": 0,
+                      "avg": 0,
+                      "totalCnt": 0,
+                      "failedCnt": 0,
+                      "overallFailureRate": 0,
+                      "currentWindow":{"name": "[GET] /-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.898+0000",?},
+                      "currentCnt": 0,
+                      "windowFailedCnt": 0,
+                      "windowFailureRate": 0,
+                      "measurementWindows":[
+                        {"name": "[GET] /-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.898+0000",?}
+                      ],
+                      "trackingStartTime": "2016-08-22T18:15:40.895+0000"
+                    }
+                  }
+              example: |-
+                {
+                  "_links":{
+                    "self":{
+                      "href": "http://localhost:2020/statistics"
+                    }
+                  },
+                  "List Jobs":{
+                    "name": "[GET] /JOBS",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.874+0000"
+                  },
+                  "Process Callbacks":{
+                    "name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[POST] /CALLBACKS/{INSTANCEID}/{TYPE}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.882+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.877+0000"
+                  },
+                  "Create Job":{
+                    "name": "[POST] /JOBS",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[POST] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.880+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[POST] /JOBS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.880+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.877+0000"
+                  },
+                  "Get Job":{
+                    "name": "[GET] /JOBS/{INSTANCEID}",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /JOBS/{INSTANCEID}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /JOBS/{INSTANCEID}-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                  },
+                  "Statistics":{
+                    "name": "[GET] /STATISTICS",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /STATISTICS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /STATISTICS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.884+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                  },
+                  "Status":{
+                    "name": "[GET] /STATUS",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /STATUS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.885+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /STATUS-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.885+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.884+0000"
+                  },
+                  "HealthCheck":{
+                    "name": "[GET] /HEALTHCHECK",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /HEALTHCHECK-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.895+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /HEALTHCHECK-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.895+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.885+0000"
+                  },
+                  "Service Info":{
+                    "name": "[GET] /",
+                    "min": 0,
+                    "max": 0,
+                    "avg": 0,
+                    "totalCnt": 0,
+                    "failedCnt": 0,
+                    "overallFailureRate": 0,
+                    "currentWindow":{"name": "[GET] /-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.898+0000",?},
+                    "currentCnt": 0,
+                    "windowFailedCnt": 0,
+                    "windowFailureRate": 0,
+                    "measurementWindows":[
+                      {"name": "[GET] /-1", "cnt": 0, "avg": 0, "startTime": "2016-08-22T18:15:40.898+0000",?}
+                    ],
+                    "trackingStartTime": "2016-08-22T18:15:40.895+0000"
+                  }
+                }
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      tags:
+        - SOME TAG
+  /loggers:
+    get:
+      summary: Retrieve the current loggers of the service
+      description: |-
+        Optional Endpoint! The endpoint(s) are "/loggers (GET & POST) Both endpoints have an optional "name" parameter which can be used to filter the results of the operation. This parameter utilizes a very simple wildcard strategy using "*" to determine filter behavior.
+        ```
+        http://service.insome.env/loggers (GET) - will return the complete list of all loggers and their log level.
+        http://service.insome.env/loggers?name=com.digitalglobe (GET) - will return the specific logger that matches the name if it exists!
+        http://service.insome.env/loggers?name=com.digitalglobe.* (GET) - will return any logger whose name starts with 'com.digitalglobe'
+        ```
+        Note: Filter behavior for the POST endpoint behaves the same only you are filtering which logger(s) are having their log level mutated!A GET on /loggers will return a list of all the currently initialized loggers and their individual effective log level.
+      operationId: RetrieveTheCurrentLoggersOfTheService
+      parameters:
+        - name: name
+          in: query
+          description: 'If specified, filters the results by the logger name provided. Follows the rules above.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: level
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrievethecurrentloggersoftheserviceresponse'
+              example: |-
+                {
+                    "Loggers":
+                    {
+                        "com.digitalglobe": "INFO",
+                        "com.digitalglobe.p2020.ajicommon.controllers.AbstractBaseAJIRequestController": "INFO",
+                        "com.digitalglobe.p2020.ajicommon.model.messages.AJIRequest": "INFO",
+                        "com.digitalglobe.p2020.ajicommon.model.messages.AbstractBaseJobMessage": "INFO",
+                        "com.digitalglobe.p2020.ajicommon.model.messages.ClientCallback": "INFO",
+                        "com.digitalglobe.p2020.ajicommon.util.properties.AJICommonProperties": "INFO",
+                        "com.digitalglobe.p2020.common.controllers": "INFO",
+                        "com.digitalglobe.p2020.common.controllers.AbstractBaseCoreServicesController": "INFO",
+                        "com.digitalglobe.p2020.common.controllers.AbstractBaseRestController": "INFO",
+                        "com.digitalglobe.p2020.common.restclient": "INFO",
+                        "com.digitalglobe.p2020.common.restclient.RestClient": "INFO",
+                        "com.digitalglobe.p2020.common.restclient.ServiceUrlResolver": "INFO",
+                        "com.digitalglobe.p2020.common.services.ServiceRestClient": "INFO",
+                        "com.digitalglobe.p2020.common.services.config.DGConfigServiceImpl": "INFO",
+                        "com.digitalglobe.p2020.common.services.p2020.BaseP2020ServiceImpl": "INFO",
+                        "com.digitalglobe.p2020.common.util.ServiceHealthUtil": "INFO",
+                        "com.digitalglobe.p2020.common.util.container.docker.DockerUtil": "INFO",
+                    }
+                }
+
+                {
+                    "overall": "FAILED",
+                    "database": "OK",
+                    "jms": "DEGRADED",
+                    "filesystem": "FAILED",
+                    "workflow": "OK",
+                    "specialInfrastructure": "OK",
+                    "event-service": "OK",
+                    "config-service": "OK",
+                    "ancillary-data-service": "OK",
+                    "_links": {
+                        "self": { "href": "http://server.dg.com/healthcheck" }
+                    }
+                }
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      tags:
+        - SOME TAG
+    post:
+      summary: Retrieve the current loggers of the service
+      description: |-
+        Optional Endpoint! The endpoint(s) are "/loggers (GET & POST) Both endpoints have an optional "name" parameter which can be used to filter the results of the operation. This parameter utilizes a very simple wildcard strategy using "*" to determine filter behavior.
+        ```
+        http://service.insome.env/loggers (GET) - will return the complete list of all loggers and their log level.
+        http://service.insome.env/loggers?name=com.digitalglobe (GET) - will return the specific logger that matches the name if it exists!
+        http://service.insome.env/loggers?name=com.digitalglobe.* (GET) - will return any logger whose name starts with 'com.digitalglobe'
+        ```
+        Note: Filter behavior for the POST endpoint behaves the same only you are filtering which logger(s) are having their log level mutated!A POST to /loggers allows you to change the log level of the specified logger(s) in real-time.
+      operationId: RetrieveTheCurrentLoggersOfTheService1
+      parameters:
+        - name: level
+          in: query
+          description: 'The log level you are switching the affected loggers too!'
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: 'If specified, filters which loggers are affected by the logger name provided. Follows the rules above.'
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrievethecurrentloggersoftheserviceresponse'
+              example:
+                Loggers:
+                  com.digitalglobe.p2020.containerserviceproxy: 'OLD LEVEL [INFO] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.ContainerServiceProxyApplication: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.ContainerServiceProxyApplication$$EnhancerBySpringCGLIB$$4820036: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.ContainerServiceProxyProperties: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.controllers.CallbackController: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.controllers.PrimaryController: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.model.dao.ProxyRequestDao: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.services.ConfigSvc: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+                  com.digitalglobe.p2020.containerserviceproxy.util.CSPStartupListener: 'OLD LEVEL [DEBUG] NEW LEVEL [DEBUG]'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /healthcheck:
+    get:
+      summary: Perform a Health Check on the Delivery Service
+      description: "A GET on /healthcheck will return the overall status of the service along with the status \nof the service's infrastructure dependencies and its service dependencies.  A call to\n/healthcheck will check items such as:\n* Database connections\n* Local required file systems\n* JMS Broker connections\n* Status's [calling /status] of services this service depends on\nThe following JSON properties are the standard names to use to represent commonly used dependencies:\n* database\n* filesystem\n* jms\n* workflow\n* [service-discovery-name] of dependent services\nThe Service must also return an 'overall' property, which is the services overall status.\nThe value assigned to the dependency can be either OK, DEGRADED, or FAILED.\n* OK - The resource is operating normally\n* DEGRADED - The resource is available, but does not appear to be operating normally\n* FAILED - The resource is unavailable."
+      operationId: PerformAHealthCheckOnTheDeliveryService
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PerformaHealthCheckontheDeliveryServiceresponse'
+              example:
+                overall: FAILED
+                database: OK
+                jms: DEGRADED
+                filesystem: FAILED
+                workflow: OK
+                specialInfrastructure: OK
+                event-service: OK
+                config-service: OK
+                ancillary-data-service: OK
+                _links:
+                  self:
+                    href: 'http://server.dg.com/healthcheck'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      tags:
+        - SOME TAG
+  /status:
+    get:
+      summary: Get the status of the Service
+      description: "This endpoints intention is to allow a caller to quickly assess the health of a service.  This is a \nquick assessment.  For a more indepth assessment a caller should call [/healthcheck]A GET on /status will return the overall status of the service along with the status \nof the service's infrastructure dependencies, and NOT its service dependencies.  A call to\n/status will check items such as:\n* Database connections\n* Local required file systems\n* JMS Broker connections\nThe following JSON properties are the standard names to use to represent commonly used dependencies:\n* database\n* filesystem\n* jms\n* workflow\nThe Service must also return an 'overall' property, which is the services overall status.\nThe value assigned to the dependency can be either OK, DEGRADED, or FAILED.\n* OK - The resource is operating normally\n* DEGRADED - The resource is available, but does not appear to be operating normally\n* FAILED - The resource is unavailable."
+      operationId: GetTheStatusOfTheService
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/GetthestatusoftheServiceresponse'
+              example:
+                overall: FAILED
+                database: OK
+                jms: DEGRADED
+                filesystem: FAILED
+                workflow: OK
+                specialInfrastructure: OK
+                _links:
+                  self:
+                    href: 'http://server.dg.com/status'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /:
+    get:
+      summary: Get information about this service
+      description: |-
+        This is generic information about the service.  This is mostly a diagnostic endpoint that will be
+        used to verify versions of code deployed and such.This operation will retrieve the standard information about a service to a caller.
+      operationId: GetInformationAboutThisService
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Getinformationaboutthisserviceresponse'
+              example:
+                serviceInfo:
+                  name: ServiceName
+                  apiVersion: 1.4
+                  buildNumber: 523
+                  gitHash: 27d15702d90dee073897ff893da4877cc6fbb2c8
+                  operationalEnvironment: production
+                  region: DGN
+                  serviceDiscoveryName: service-name
+                _links:
+                  self:
+                    href: 'http://server.dg.com/'
+                  status:
+                    href: 'http://server.dg.com/status'
+                  healthcheck:
+                    href: 'http://server.dg.com/healthcheck'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      tags:
+        - SOME TAG
+components:
+  schemas:
+    Retrievethecurrentloggersoftheserviceresponse:
+      title: Retrievethecurrentloggersoftheserviceresponse
+      required:
+        - Loggers
+      type: object
+      properties:
+        Loggers:
+          type: object
+      example:
+        Loggers:
+          com.digitalglobe: INFO
+          com.digitalglobe.p2020.ajicommon.controllers.AbstractBaseAJIRequestController: INFO
+          com.digitalglobe.p2020.ajicommon.model.messages.AJIRequest: INFO
+          com.digitalglobe.p2020.ajicommon.model.messages.AbstractBaseJobMessage: INFO
+          com.digitalglobe.p2020.ajicommon.model.messages.ClientCallback: INFO
+          com.digitalglobe.p2020.ajicommon.util.properties.AJICommonProperties: INFO
+          com.digitalglobe.p2020.common.controllers: INFO
+          com.digitalglobe.p2020.common.controllers.AbstractBaseCoreServicesController: INFO
+          com.digitalglobe.p2020.common.controllers.AbstractBaseRestController: INFO
+          com.digitalglobe.p2020.common.restclient: INFO
+          com.digitalglobe.p2020.common.restclient.RestClient: INFO
+          com.digitalglobe.p2020.common.restclient.ServiceUrlResolver: INFO
+          com.digitalglobe.p2020.common.services.ServiceRestClient: INFO
+          com.digitalglobe.p2020.common.services.config.DGConfigServiceImpl: INFO
+          com.digitalglobe.p2020.common.services.p2020.BaseP2020ServiceImpl: INFO
+          com.digitalglobe.p2020.common.util.ServiceHealthUtil: INFO
+          com.digitalglobe.p2020.common.util.container.docker.DockerUtil: INFO
+      x-tags:
+        - SOME TAG
+    PerformaHealthCheckontheDeliveryServiceresponse:
+      title: PerformaHealthCheckontheDeliveryServiceresponse
+      required:
+        - overall
+        - database
+        - jms
+        - filesystem
+        - workflow
+        - specialInfrastructure
+        - event-service
+        - config-service
+        - ancillary-data-service
+        - _links
+      type: object
+      properties:
+        overall:
+          type: string
+        database:
+          type: string
+        jms:
+          type: string
+        filesystem:
+          type: string
+        workflow:
+          type: string
+        specialInfrastructure:
+          type: string
+        event-service:
+          type: string
+        config-service:
+          type: string
+        ancillary-data-service:
+          type: string
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+      example:
+        overall: FAILED
+        database: OK
+        jms: DEGRADED
+        filesystem: FAILED
+        workflow: OK
+        specialInfrastructure: OK
+        event-service: OK
+        config-service: OK
+        ancillary-data-service: OK
+        _links:
+          self:
+            href: 'http://server.dg.com/healthcheck'
+    GetthestatusoftheServiceresponse:
+      title: GetthestatusoftheServiceresponse
+      required:
+        - overall
+        - database
+        - jms
+        - filesystem
+        - workflow
+        - specialInfrastructure
+        - _links
+      type: object
+      properties:
+        overall:
+          type: string
+        database:
+          type: string
+        jms:
+          type: string
+        filesystem:
+          type: string
+        workflow:
+          type: string
+        specialInfrastructure:
+          type: string
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+      example:
+        overall: FAILED
+        database: OK
+        jms: DEGRADED
+        filesystem: FAILED
+        workflow: OK
+        specialInfrastructure: OK
+        _links:
+          self:
+            href: 'http://server.dg.com/status'
+    Getinformationaboutthisserviceresponse:
+      title: Getinformationaboutthisserviceresponse
+      required:
+        - serviceInfo
+        - _links
+      type: object
+      properties:
+        serviceInfo:
+          type: object
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+      example:
+        serviceInfo:
+          name: ServiceName
+          apiVersion: 1.4
+          buildNumber: 523
+          gitHash: 27d15702d90dee073897ff893da4877cc6fbb2c8
+          operationalEnvironment: production
+          region: DGN
+          serviceDiscoveryName: service-name
+        _links:
+          self:
+            href: 'http://server.dg.com/'
+          status:
+            href: 'http://server.dg.com/status'
+          healthcheck:
+            href: 'http://server.dg.com/healthcheck'
+tags:
